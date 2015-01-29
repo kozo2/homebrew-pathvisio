@@ -10,9 +10,13 @@ class Pathvisio < Formula
 
   def install
     inreplace "pathvisio.sh", "$(dirname $0)", libexec
-    system "chmod", "+x", "pathvisio.sh"
+    chmod "+x", "pathvisio.sh"
     libexec.install %W[LICENSE-2.0.txt NOTICE.txt pathvisio.jar pathvisio.sh]
     bin.install_symlink libexec/"pathvisio.sh" => "pathvisio"
     doc.install "readme.txt"
+  end
+
+  test do
+    system "#{bin}/pathvisio", "-v"
   end
 end
